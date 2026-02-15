@@ -8,5 +8,6 @@ import java.util.List;
 
 public interface TaskRepository extends JpaRepository<Task, Long> {
     List<Task> findByCreatedByOrAssignedTo(Long createdBy, Long assignedTo);
-    List<Task> findByCreatedByOrAssignedToAndStatus(Long createdBy, Long assignedTo, TaskStatus status);
+    List<Task> findByStatusAndCreatedByOrStatusAndAssignedTo(
+            TaskStatus status, Long createdBy, TaskStatus status2, Long assignedTo);
 }
