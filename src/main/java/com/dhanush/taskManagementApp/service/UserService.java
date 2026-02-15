@@ -16,6 +16,10 @@ public class UserService {
 
     public User registerUser(String name, String email, String password) {
 
+        if (userRepository.findByEmail(email).isPresent()) {
+            throw new RuntimeException("Email already registered");
+        }
+
         User user = User.builder()
                 .name(name)
                 .email(email)
