@@ -78,8 +78,7 @@ CREATE TABLE tasks (
   status ENUM('TODO','IN_PROGRESS','DONE') DEFAULT 'TODO',
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   created_by BIGINT NOT NULL,
-  assigned_to BIGINT,
-  FOREIGN KEY(created_by) REFERENCES users(id)
+  assigned_to BIGINT
 );
 ```
 
