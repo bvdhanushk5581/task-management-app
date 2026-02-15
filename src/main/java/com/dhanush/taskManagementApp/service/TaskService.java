@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -22,6 +23,8 @@ public class TaskService {
         Task task = Task.builder()
                 .title(request.getTitle())
                 .description(request.getDescription())
+                .status(request.getStatus() != null ? TaskStatus.valueOf(request.getStatus()) : TaskStatus.TODO)
+                .createdAt(LocalDateTime.now())
                 .assignedTo(request.getAssignedTo())
                 .createdBy(createdById)
                 .build();
@@ -29,9 +32,9 @@ public class TaskService {
     }
 
     public List<Task> getTasks(Long userId, String status) {
-        if (status != null) {
+        if (status != null && !status.isEmpty()) {
             TaskStatus taskStatus = TaskStatus.valueOf(status.toUpperCase());
-            return taskRepository.findByCreatedByOrAssignedToAndStatus(userId, userId, taskStatus);
+            return taskRepository.findByStatusAndCreatedByOrStatusAndAssignedTo(taskStatus, userId, taskStatus, userId);
         }
         return taskRepository.findByCreatedByOrAssignedTo(userId, userId);
     }
