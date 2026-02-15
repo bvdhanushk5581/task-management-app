@@ -10,4 +10,5 @@ public class TaskRequest {
 
     private String description;
     private Long assignedTo;
+    private String status;
 }
