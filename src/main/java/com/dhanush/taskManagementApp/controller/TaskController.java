@@ -46,10 +46,10 @@ public class TaskController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteTask(@PathVariable Long id, Authentication auth) {
+    public ResponseEntity<String> deleteTask(@PathVariable Long id, Authentication auth) {
         User currentUser = userRepository.findByEmail(auth.getName())
                 .orElseThrow(() -> new RuntimeException("User not found"));
         taskService.deleteTask(id, currentUser.getId());
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok("Task deleted successfully");
     }
 }
