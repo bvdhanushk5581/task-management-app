@@ -43,7 +43,7 @@ POST /users/login
 }
 ```
 
-Response: "Login successful" or 401 Unauthorized
+Response: "Login successful" or 401 Unauthorized "Invalid email or password"
 
 ### Task APIs (Basic Auth: email:password)
 ### Headers
