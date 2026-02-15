@@ -2,7 +2,6 @@ package com.dhanush.taskManagementApp.model;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.antlr.v4.runtime.misc.NotNull;
 
 import java.time.LocalDateTime;
 
@@ -19,7 +18,9 @@ public class Task {
     private String title;
     private String description;
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private TaskStatus status = TaskStatus.TODO;
+    @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
     private Long createdBy;
     private Long assignedTo;
